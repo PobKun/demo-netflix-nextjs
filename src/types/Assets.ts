@@ -1,0 +1,1 @@
+export type CategoriesType = "Series"|"Cartoon"|"Movie"|"TvShow"

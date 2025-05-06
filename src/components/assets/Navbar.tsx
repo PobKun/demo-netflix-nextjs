@@ -1,16 +1,31 @@
 'use client'
 import { useSearch } from "@/context/SearchProvider";
+import { Locale } from "@/i18n/config";
+import { setUserLocale } from "@/i18n/locale";
 import { AnimatePresence, motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { useTheme } from "next-themes";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useTransition } from "react";
 import { FaBell, FaChromecast, FaMoon, FaSearch, FaSun } from "react-icons/fa";
 import { FaCaretDown } from "react-icons/fa6";
+import LoadingOverlay from "./LoadingOverlay";
+
 export default function Navbar() {
     const { setTheme } = useTheme()
     const { search,setSearch } = useSearch();
+    const t = useTranslations()
 
+    const [isPending, startTransition] = useTransition();
+
+    const onChangeLocale = (value: Locale) => {
+      const locale = value as Locale;
+      startTransition(() => {
+        setUserLocale(locale);
+      });
+    }
+    
     const [dropdowns, setDropdowns] = useState({
         profile: false,
         search: false,
@@ -52,6 +67,10 @@ export default function Navbar() {
 
   return (
     <header className="relative z-[990] navbar-gradient-black ">
+        {isPending && (
+            <LoadingOverlay />
+        )}
+       
        <nav>
         <div className="flex justify-between py-2 px-4">
             <div className="flex gap-4 lg:gap-6  my-auto">
@@ -62,19 +81,19 @@ export default function Navbar() {
                 </Link>
                 <div className="hidden sm:flex gap-3 lg:gap-4 my-auto ">
                     <div className="nav-link-header active">
-                        <Link href="/">Home</Link>
+                        <Link href="/">{t('Menu.Home')}</Link>
                     </div>
                     <div className="nav-link-header">
-                        <Link href="/">TV Shows</Link>
+                        <Link href="/">{t('Categories.TvShow')}</Link>
                     </div>
                     <div className="nav-link-header">
-                        <Link href="/">Movies</Link>
+                        <Link href="/">{t('Categories.Movie')}</Link>
                     </div>
                     <div className="nav-link-header">
-                        <Link href="/">New & Popular</Link>
+                        <Link href="/">{t('Menu.NewPopular')}</Link>
                     </div>
                     <div className="nav-link-header">
-                        <Link href="/">Browse by Languages</Link>
+                        <Link href="/">{t('Menu.BrowseByLanguages')}</Link>
                     </div>
                 </div>
             </div>
@@ -96,7 +115,7 @@ export default function Navbar() {
                             transition={{ duration: 0.2 }}
                             className="absolute max-sm:left-1/2 max-sm:-translate-x-1/2 right-[-5px] top-[105%] mt-2 w-48 bg-[#2e2e2e] shadow-md rounded-md py-2 z-50"
                         >
-                            <div className="px-4 py-2 font-semibold">Search</div>
+                            <div className="px-4 py-2 font-semibold">{t('Menu.Search')}</div>
                             <div className="px-4 py-2">
                                 <input type="text" onChange={(e)=>setSearch(e.target.value ?? '')} value={search} className="px-2 py-2 font-light text-white bg-white/10 rounded-md w-full border" />
                             </div>
@@ -133,19 +152,19 @@ export default function Navbar() {
                             transition={{ duration: 0.2 }}
                             className="absolute right-[-5px] top-[105%] mt-2 w-48 bg-[#2e2e2e] shadow-md rounded-md py-2 z-50"
                         >
-                            <div className="px-4 py-2 font-semibold">Choose language</div>
+                            <div className="px-4 py-2 font-semibold">{t('Menu.ChooseLanguage')}</div>
                             
-                            <button className="nav-link-dropdown">
+                            <button onClick={()=>onChangeLocale('th')} className="nav-link-dropdown">
                                 Thai (ไทย)
                             </button>
-                            <button className="nav-link-dropdown">
-                                Enaglish
+                            <button onClick={()=>onChangeLocale('en')} className="nav-link-dropdown">
+                                English
                             </button>
                             <div className="my-2">
                                 <hr />
                             </div>
 
-                            <div className="px-4 py-2 font-semibold">Theme</div>
+                            <div className="px-4 py-2 font-semibold">{t('Menu.Theme')}</div>
                             <button onClick={() => setTheme('light')} className="nav-link-dropdown flex gap-1">
                                 Light Mode <FaSun className="my-auto" />
                             </button>
@@ -157,7 +176,7 @@ export default function Navbar() {
                             </div>
 
                             <Link href="/" className="nav-link-dropdown text-red-500">
-                                Logout
+                                {t('Menu.Logout')}
                             </Link>
                             
                         </motion.div>
@@ -172,15 +191,15 @@ export default function Navbar() {
 
         <div className="flex sm:hidden justify-between gap-4 py-2 px-4 max-w-[340px] mx-auto">
             <div className="nav-link-header text-base">
-                <Link href="/">TV Shows</Link>
+                <Link href="/">{t('Categories.TvShow')}</Link>
             </div>
             <div className="nav-link-header text-base">
-                <Link href="/">Movies</Link>
+                <Link href="/">{t('Categories.Movie')}</Link>
             </div>
             <div className="nav-link-header  text-base">
                     <div className="relative" data-dropdown>
                         <div className="flex gap-1 cursor-pointer " onClick={() => toggleDropdown("categories")}>
-                            <span>Categories</span>
+                            <span>{t('Menu.Categories')}</span>
                             <div className="my-auto">
                             <FaCaretDown />
                             </div>
@@ -197,10 +216,10 @@ export default function Navbar() {
                         >
                             
                             <Link href={'/'} className="nav-link-dropdown">
-                                New & Popular
+                                {t('Menu.NewPopular')}
                             </Link>
                             <Link href={'/'} className="nav-link-dropdown">
-                                Browse by Languages
+                                {t('Menu.BrowseByLanguages')}
                             </Link>
                           
                         </motion.div>

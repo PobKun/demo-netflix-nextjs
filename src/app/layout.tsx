@@ -4,6 +4,8 @@ import "./globals.css";
 import Navbar from "@/components/assets/Navbar";
 import { SearchProvider } from "@/context/SearchProvider";
 import { ThemeProvider, } from "next-themes";
+import { getLocale } from "next-intl/server";
+import { NextIntlClientProvider } from "next-intl";
 
 
 const noto_sans_thai = Noto_Sans_Thai({
@@ -16,29 +18,33 @@ export const metadata: Metadata = {
   description: "Netflix Demo App by Pattaraphon",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const locale = await getLocale();
+
+
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang={locale} suppressHydrationWarning>
       <body
         className={`${noto_sans_thai.className}`}
       >
         <ThemeProvider attribute="class"  defaultTheme="dark">
-          <SearchProvider> 
-            <section>
-              <Navbar />
-            </section>
-            <section> 
-              {children}
-            </section>
-            <footer className="py-8 text-center bg-white dark:bg-black">
-              <span className="text-black dark:text-white">Demo Netflix (Pattaraphon)</span>
-            </footer>
-            
-          </SearchProvider>
+          <NextIntlClientProvider>
+            <SearchProvider> 
+              <section>
+                <Navbar />
+              </section>
+              <section> 
+                {children}
+              </section>
+              <footer className="py-8 text-center bg-white dark:bg-black">
+                <span className="text-black dark:text-white">Demo Netflix (Pattaraphon)</span>
+              </footer>
+            </SearchProvider>
+          </NextIntlClientProvider>
         </ThemeProvider>
       </body>
     </html>

@@ -1,0 +1,26 @@
+{
+    "Menu": {
+        "Home": "หน้าแรก",
+        "NewPopular": "มาใหม่ & ยอดนิยม",
+        "Categories": "หมวดหมู่",
+        "BrowseByLanguages": "เรียกดูตามภาษา",
+        "ChooseLanguage": "เลือกภาษา",
+        "Theme": "ธีม",
+        "Search": "ค้นหา",
+        "Logout": "ออกจากระบบ"
+    },
+    "Button": {
+        "Play": "เล่น",
+        "MoreInfo": "ข้อมูลเพิ่มเติม",
+        "Info": "ข้อมูล",
+        "MyList": "รายการของฉัน"
+    },
+    "Top10": "อันดับที่ #{ranking} ใน {category} วันนี้",
+    "Categories": {
+        "Series": "ซีรีส์",
+        "Cartoon": "การ์ตูน",
+        "Movie": "ภาพยนตร์",
+        "TvShow": "รายการทีวี"
+    },
+    "Popular": "ยอดนิยมบน Netflix"
+}

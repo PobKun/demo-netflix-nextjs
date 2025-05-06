@@ -1,0 +1,26 @@
+{
+    "Menu": {
+        "Home": "Home",
+        "NewPopular": "New & Popular",
+        "Categories": "Categories",
+        "BrowseByLanguages": "Browse by Languages",
+        "ChooseLanguage": "Choose language",
+        "Theme": "Theme",
+        "Search": "Search",
+        "Logout": "Logout"
+    },
+    "Button": {
+        "Play": "Play",
+        "MoreInfo": "More Info",
+        "Info": "Info",
+        "MyList": "My List"
+    },
+    "Top10": "#{ranking} in {category} Today",
+    "Categories": {
+        "Series": "Series",
+        "Cartoon": "Cartoon",
+        "Movie": "Movie",
+        "TvShow": "TV Show"
+    },
+    "Popular": "Popular on Netflix"
+}

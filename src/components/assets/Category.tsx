@@ -2,12 +2,14 @@
 import Image from 'next/image';
 import { Swiper ,SwiperSlide } from 'swiper/react';
 import 'swiper/css';
+import { useTranslations } from 'next-intl';
 export default function Category() {
+  const t = useTranslations()
   return (
     <>
         <div className="mt-5 lg:mt-8 px-6">
             <div>
-              <h2 className="text-2xl font-bold text-black dark:text-white">Popular on Netflix</h2>
+              <h2 className="text-2xl font-bold text-black dark:text-white">{t('Popular')}</h2>
             </div>
             <div className="mt-5">
                 <Swiper
