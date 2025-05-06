@@ -15,7 +15,7 @@
         "Info": "ข้อมูล",
         "MyList": "รายการของฉัน"
     },
-    "Top10": "อันดับที่ #{ranking} ใน {category} วันนี้",
+    "Top10": "#{ranking} ใน {category} วันนี้",
     "Categories": {
         "Series": "ซีรีส์",
         "Cartoon": "การ์ตูน",
