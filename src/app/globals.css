@@ -1,10 +1,15 @@
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
 
-:root {
-  --background: #000000;
-  --foreground: #ffffff;
+:root[data-theme="light"] {
+  background: white;
+  color: black;
 }
 
+:root[data-theme="dark"] {
+  background: black;
+  color: white;
+}
 
 body {
   background: var(--background);
@@ -23,12 +28,18 @@ body {
     @apply font-bold;
   }
   .button-cover {
-    @apply cursor-pointer px-6 py-3 flex gap-2 rounded-sm font-bold text-xl transition duration-300 ease-in-out hover:opacity-[0.8];
+    @apply cursor-pointer px-7 py-2 flex gap-2 rounded-sm font-bold text-xl transition duration-300 ease-in-out hover:opacity-[0.8];
   }
 }
 
-.cover-gradient-black {
-  background-image: linear-gradient(180deg, rgba(20,20,20,0) 0%, rgba(20,20,20,0.15) 15%, rgba(20,20,20,0.35) 29%, rgba(20,20,20,0.58) 44%, rgba(20,20,20,1) 68%, rgba(20,20,20,1));
+@layer components {
+  .cover-gradient-black {
+    background-image: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.15) 15%, rgba(0,0,0,0.35) 29%, rgba(0,0,0,0.58) 80%, rgba(0,0,0,1) 90%, rgba(0,0,0,1));
+  }
+
+  .cover-gradient-white {
+    background-image: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.05) 15%, rgba(255,255,255,0.10) 29%, rgba(255,255,255,0.80) 80%, rgba(255,255,255,1) 90%, rgba(255,255,255,1));
+  }
 }
 
 .navbar-gradient-black  {

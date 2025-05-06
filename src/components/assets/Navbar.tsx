@@ -1,12 +1,14 @@
 'use client'
 import { useSearch } from "@/context/SearchProvider";
 import { AnimatePresence, motion } from "framer-motion";
+import { useTheme } from "next-themes";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { FaBell, FaChromecast, FaSearch } from "react-icons/fa";
+import { FaBell, FaChromecast, FaMoon, FaSearch, FaSun } from "react-icons/fa";
 import { FaCaretDown } from "react-icons/fa6";
 export default function Navbar() {
+    const { setTheme } = useTheme()
     const { search,setSearch } = useSearch();
 
     const [dropdowns, setDropdowns] = useState({
@@ -142,6 +144,18 @@ export default function Navbar() {
                             <div className="my-2">
                                 <hr />
                             </div>
+
+                            <div className="px-4 py-2 font-semibold">Theme</div>
+                            <button onClick={() => setTheme('light')} className="nav-link-dropdown flex gap-1">
+                                Light Mode <FaSun className="my-auto" />
+                            </button>
+                            <button onClick={() => setTheme('dark')} className="nav-link-dropdown  flex gap-1">
+                                Dark Mode <FaMoon className="my-auto" />
+                            </button>
+                            <div className="my-2">
+                                <hr />
+                            </div>
+
                             <Link href="/" className="nav-link-dropdown text-red-500">
                                 Logout
                             </Link>
