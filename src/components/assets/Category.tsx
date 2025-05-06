@@ -15,7 +15,7 @@ export default function Category() {
                  slidesPerView={'auto'}
                  freeMode={true}
                 >
-                   {[...Array(8)].map((v, i) => (
+                   {[...Array(9)].map((v, i) => (
                     <SwiperSlide key={i} className='!w-[220px] sm:!w-[380px]'>
                         <Image onClick={()=>console.log('click',i)} src={`${process.env.NEXT_PUBLIC_S3}/movie_image/m${i}.webp`} width={390} height={219} className="select-none w-[220px] sm:w-[380px] max-h-[213.93px] rounded cursor-pointer" alt="logo_m0" loading="lazy"/>
                     </SwiperSlide>

@@ -65,7 +65,7 @@ export default function Home() {
                 </div>
 
                 <div className="block sm:hidden text-center mt-5">
-                  <span className="text-lg">TV Show</span>
+                  <span className="text-lg text-white">TV Show</span>
                 </div>
 
                 <div className="mt-5 flex justify-between max-w-[350px] max-sm:mx-auto sm:w-auto sm:justify-start gap-4">
