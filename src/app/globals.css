@@ -1,26 +1,36 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #000000;
+  --foreground: #ffffff;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer base {
+  .nav-link-header {
+    @apply text-[#e5e5e5] font-light text-sm my-auto;
+  }
+  .nav-link-dropdown {
+    @apply block w-full text-left px-4 py-2 font-light  transition duration-300 ease-in-out hover:scale-95;
+  }
+  .active {
+    @apply font-bold;
+  }
+  .button-cover {
+    @apply cursor-pointer px-6 py-3 flex gap-2 rounded-sm font-bold text-xl transition duration-300 ease-in-out hover:opacity-[0.8];
+  }
+}
+
+.cover-gradient-black {
+  background-image: linear-gradient(180deg, rgba(20,20,20,0) 0%, rgba(20,20,20,0.15) 15%, rgba(20,20,20,0.35) 29%, rgba(20,20,20,0.58) 44%, rgba(20,20,20,1) 68%, rgba(20,20,20,1));
+}
+
+.navbar-gradient-black  {
+  background-image: linear-gradient(180deg, rgba(20,20,20,0.8) 0%,rgba(20,20,20,0.2) 50%,rgba(20,20,20,0) 100%);
 }
