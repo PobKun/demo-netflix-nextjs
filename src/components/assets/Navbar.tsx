@@ -109,10 +109,10 @@ export default function Navbar() {
                     <span>Kids</span>
                 </div>
                 <div className="nav-link-header">
-                    <Link href="/"><FaBell className="max-sm:text-xl"/></Link>
+                    <Link href="/" aria-label="notification"><FaBell className="max-sm:text-xl"/></Link>
                 </div>
                 <div className="nav-link-header block sm:hidden">
-                    <Link href="/"><FaChromecast className="max-sm:text-xl"/></Link>
+                    <Link href="/" aria-label="chromecast"><FaChromecast className="max-sm:text-xl"/></Link>
                 </div>
                 
                 <div className="nav-link-header">
