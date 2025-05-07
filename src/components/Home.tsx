@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { FaPlay, FaPlus } from "react-icons/fa";
+import { FaPlay, FaPlus, FaTimes } from "react-icons/fa";
 import { BsInfoCircle } from "react-icons/bs";
 import { useTheme } from "next-themes";
 import Category from "@/components/assets/Category";
@@ -24,8 +24,8 @@ export default function Home() {
     height: 1
    });
   const [hookTheme , setHookTheme] = useState<string | undefined>("dark")
-
-  const hasRun = useRef(false);
+  const hasRun = useRef<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const {isLoading,data,refetch} = useQuery({
     queryKey: ['FetchMovieCategorized'],
@@ -73,8 +73,36 @@ export default function Home() {
   return (
     <div suppressHydrationWarning className={`min-h-screen ${hookTheme === 'light' ? 'cover-gradient-white' : 'cover-gradient-black'}`}>
 
+
         {isLoading && 
           <LoadingOverlay />
+        }
+
+        {(isOpen && coverBoxData) && 
+            <div className="fixed inset-0 z-[9900] bg-white/90 dark:bg-black/90 flex items-center justify-center">
+              <div className="relative p-6 max-h-screen overflow-y-auto shadow-lg w-full h-full">
+                <button
+                  className="cursor-pointer absolute z-[9901] top-4 right-4 text-black dark:text-white hover:text-red-500 transition duration-300 ease-in-out"
+                  onClick={() => setIsOpen(false)}
+                >
+                  <FaTimes className="text-2xl" />
+                </button>
+
+                <div className="text-start text-black dark:text-white py-5 max-w-[800px] mx-auto">
+                  <div className="mb-5">
+                    <div className="video-wrapper">
+                      <iframe width={560} height={315} src={coverBoxData.trailer_embed_url} loading={'lazy'} title={coverBoxData.title ?? 'Video'} allowFullScreen></iframe>
+                    </div>
+                  </div>
+                  <h2 className="text-xl font-bold">{t('MovieName')} : <span className="text-lg">{coverBoxData.title}</span></h2>
+                  <div>
+                  <span className="text-xl font-bold">{t('FullDetail')} : </span>
+                  <span className="text-lg">{coverBoxData.synopsis}</span>
+                  </div>
+
+                </div>
+              </div>
+            </div>
         }
 
         <div className="flex flex-col justify-end sm:justify-center lg:pb-12 h-[55vh] lg:h-[70vh]">
@@ -139,13 +167,13 @@ export default function Home() {
                     <FaPlus className="m-auto text-3xl" />
                     <div className="mt-1">{t('Button.MyList')}</div>
                   </button>
-                  <button onClick={()=>console.log('play')}  className="bg-white text-black button-cover min-w-[130px] my-auto">
+                  <button onClick={()=>setIsOpen(true)}  className="bg-white text-black button-cover min-w-[130px] my-auto">
                     <FaPlay className="my-auto" /> {t('Button.Play')}
                   </button>
-                  <button onClick={()=>console.log('info')} className="max-sm:hidden bg-[#515451] text-white button-cover">
+                  <button onClick={()=>setIsOpen(true)} className="max-sm:hidden bg-[#515451] text-white button-cover">
                     <BsInfoCircle className="my-auto" /> {t('Button.MoreInfo')}
                   </button>
-                  <button onClick={()=>console.log('info')} className="sm:hidden text-white cursor-pointer">
+                  <button onClick={()=>setIsOpen(true)} className="sm:hidden text-white cursor-pointer">
                     <BsInfoCircle className="m-auto text-3xl" />
                     <div className="mt-1">{t('Button.Info')}</div>
                   </button>

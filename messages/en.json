@@ -22,5 +22,8 @@
         "Movie": "Movie",
         "TvShow": "TV Show"
     },
-    "Popular": "Popular on Netflix"
+    "Popular": "Popular on Netflix",
+    "NotFound": "Data not found",
+    "MovieName": "Title",
+    "FullDetail": "Detail"
 }

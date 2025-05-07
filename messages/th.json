@@ -22,5 +22,8 @@
         "Movie": "ภาพยนตร์",
         "TvShow": "รายการทีวี"
     },
-    "Popular": "ยอดนิยมบน Netflix"
+    "Popular": "ยอดนิยมบน Netflix",
+    "NotFound": "ไม่พบข้อมูล",
+    "MovieName": "ชื่อเรื่อง",
+    "FullDetail": "รายละเอียด"
 }
