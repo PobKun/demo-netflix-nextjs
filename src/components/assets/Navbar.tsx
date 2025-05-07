@@ -75,8 +75,8 @@ export default function Navbar() {
         <div className="flex justify-between py-2 px-4">
             <div className="flex gap-4 lg:gap-6  my-auto">
                 <Link href="/">
-                    <Image alt="logo-netflix" src={`${process.env.NEXT_PUBLIC_S3}/netflix_logo.webp`} width={1800} height={756}  className="hidden md:block w-[120px] h-auto  my-auto" priority/>
-                    <Image alt="logo-netflix-symbol" src={`${process.env.NEXT_PUBLIC_S3}/netflix_symbol.webp`} width={96} height={174}  className="block md:hidden w-[40px] h-auto  my-auto" priority/>
+                    <Image alt="logo-netflix" src={`${process.env.NEXT_PUBLIC_S3}/netflix_logo.webp`} width={1800} height={756}  className="hidden md:block w-[120px] h-auto  my-auto"/>
+                    <Image alt="logo-netflix-symbol" src={`${process.env.NEXT_PUBLIC_S3}/netflix_symbol.webp`} width={96} height={174}  className="block md:hidden w-[40px] h-auto  my-auto"/>
 
                 </Link>
                 <div className="hidden sm:flex gap-3 lg:gap-4 my-auto ">

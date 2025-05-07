@@ -7,6 +7,7 @@ import { ThemeProvider, } from "next-themes";
 import { getLocale } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
 import ReactQueryProvider from "@/providers/ReactQueryProvider";
+import { CoverBoxProvider } from "@/providers/CoverBoxProvider";
 
 
 const noto_sans_thai = Noto_Sans_Thai({
@@ -36,15 +37,17 @@ export default async function RootLayout({
           <ThemeProvider attribute="class"  defaultTheme="dark">
             <NextIntlClientProvider>
               <SearchProvider> 
-                <section>
-                  <Navbar />
-                </section>
-                <section> 
-                  {children}
-                </section>
-                <footer className="py-8 text-center bg-white dark:bg-black">
-                  <span className="text-black dark:text-white">Demo Netflix (Pattaraphon)</span>
-                </footer>
+                <CoverBoxProvider>
+                  <section>
+                    <Navbar />
+                  </section>
+                  <section> 
+                    {children}
+                  </section>
+                  <footer className="py-8 text-center bg-white dark:bg-black">
+                    <span className="text-black dark:text-white">Demo Netflix (Pattaraphon)</span>
+                  </footer>
+                </CoverBoxProvider>
               </SearchProvider>
             </NextIntlClientProvider>
           </ThemeProvider>

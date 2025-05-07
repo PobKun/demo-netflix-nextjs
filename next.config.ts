@@ -3,7 +3,14 @@ import createNextIntlPlugin from 'next-intl/plugin';
  
 const nextConfig: NextConfig = {
   images: {
-    remotePatterns: [new URL('https://s3.wareeasy.com/demo-netflix/**')],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 's3.wareeasy.com',
+        port: '',
+        pathname: '/**',
+      },
+    ],
   },
 };
 

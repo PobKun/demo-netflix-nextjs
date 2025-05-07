@@ -9,10 +9,12 @@ import { FetchMovieSearch } from '@/utils/Fetch';
 import { useSearch } from '@/providers/SearchProvider';
 import { useEffect } from 'react';
 import NotFoundData from './NotFoundData';
+import { useCoverBox } from '@/providers/CoverBoxProvider';
 export default function Category({data,theme}:{data:ApiResponse_MediaCategorized,theme:string}) {
   const t = useTranslations()
   const { search } = useSearch();
   const locale = useLocale()
+  const {setCoverBoxData} = useCoverBox()
   
   const {isLoading:isLoadingSearch,data:dataSearch,refetch} = useQuery({
       queryKey: ['FetchMovieSearch',search],
@@ -30,7 +32,7 @@ export default function Category({data,theme}:{data:ApiResponse_MediaCategorized
     return () => {
       clearTimeout(handler);
     };
-  }, [search, refetch]);
+  }, [search,locale,refetch]);
 
   return (
     <>
@@ -50,7 +52,7 @@ export default function Category({data,theme}:{data:ApiResponse_MediaCategorized
                   >
                     {dataSearch.data.map((v, i) => (
                       <SwiperSlide key={i} className='!w-[220px] sm:!w-[380px]'>
-                          <Image onClick={()=>console.log('click',i)} src={`${v.image}`} width={390} height={219} className="select-none w-[220px] sm:w-[380px] max-h-[213.93px] rounded cursor-pointer" alt={v.title} loading="lazy"/>
+                          <Image onClick={()=>setCoverBoxData(v)} src={`${v.image}`} width={390} height={219} className="select-none w-[220px] sm:w-[380px] max-h-[213.93px] rounded cursor-pointer" alt={v.title} loading="lazy"/>
                       </SwiperSlide>
                     ))}
                   </Swiper>
@@ -75,7 +77,7 @@ export default function Category({data,theme}:{data:ApiResponse_MediaCategorized
                   >
                     {items.map((v, i) => (
                       <SwiperSlide key={i} className='!w-[220px] sm:!w-[380px]'>
-                          <Image onClick={()=>console.log('click',i)} src={`${v.image}`} width={390} height={219} className="select-none w-[220px] sm:w-[380px] max-h-[213.93px] rounded cursor-pointer" alt={v.title} loading="lazy"/>
+                          <Image onClick={()=>setCoverBoxData(v)} src={`${v.image}`} width={390} height={219} className="select-none w-[220px] sm:w-[380px] max-h-[213.93px] rounded cursor-pointer" alt={v.title} loading="lazy"/>
                       </SwiperSlide>
                     ))}
                   </Swiper>

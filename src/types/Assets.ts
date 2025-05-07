@@ -26,3 +26,4 @@ export type ApiResponseType<T> = {
 
 export type ApiResponse_MediaCategorized = ApiResponseType<MediaCategorizedType>
 export type ApiResponse_MediaSearch = ApiResponseType<MediaItemType[]>
+export type ApiResponse_MediaID = ApiResponseType<MediaItemType>
