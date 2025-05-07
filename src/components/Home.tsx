@@ -20,8 +20,8 @@ export default function Home() {
   const t = useTranslations()
   const locale = useLocale()
   const [imageSize, setSmageSize] = useState({
-    width: 1,
-    height: 1
+    width: 1000,
+    height: 1000
    });
   const [hookTheme , setHookTheme] = useState<string | undefined>("dark")
   const hasRun = useRef<boolean>(false);
@@ -126,12 +126,14 @@ export default function Home() {
                 </div>
               }
                 <div className="mt-5 relative w-full">
-                  <Image sizes="cover" src={`${process.env.NEXT_PUBLIC_S3}/logo_test.webp`} width={imageSize.width} height={imageSize.height} className="select-none w-[400px] max-sm:mx-auto sm:w-[450px] max-h-[150px]" alt="logo_test" onLoad={target => {
+                  {coverBoxData &&
+                  <Image src={`${coverBoxData.image_logo}`} width={imageSize.width} height={imageSize.height} className="select-none w-[400px] max-sm:mx-auto sm:w-[450px] max-h-[150px]" alt={'logo_movie'} onLoad={target => {
                         setSmageSize({
-                        width: target.currentTarget.naturalWidth,
-                        height: target.currentTarget.naturalHeight
+                          width: target.currentTarget.naturalWidth,
+                          height: target.currentTarget.naturalHeight
                         });
-                    }} priority/>
+                    }}/>
+                  }
                 </div>
 
               

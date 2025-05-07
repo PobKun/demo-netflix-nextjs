@@ -8,6 +8,7 @@ export type MediaItemType = {
     trailer_embed_url: string;
     image: string;
     image_cover: string;
+    image_logo: string;
     top10: number;
     popular: boolean;
 };
