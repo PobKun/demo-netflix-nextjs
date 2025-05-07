@@ -10,6 +10,7 @@ Run development server:
 npm install
 npm run dev
 ```
+(RUN Port: 3737)
 
 Run production server:
 ```bash
@@ -17,6 +18,7 @@ npm install
 npm run build
 npm run start
 ```
+(RUN Port: 3737)
 
 ## Library & Features
 - next-themes (Dark Mode / Light Mode)
