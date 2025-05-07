@@ -26,6 +26,7 @@ export default function Home() {
   const [hookTheme , setHookTheme] = useState<string | undefined>("dark")
   const hasRun = useRef<boolean>(false);
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [loadImg, setLoadImg] = useState<boolean>(false);
 
   const {isLoading,data,refetch} = useQuery({
     queryKey: ['FetchMovieCategorized'],
@@ -70,6 +71,12 @@ export default function Home() {
     }
   },[isLoadingMovieID,dataMovieID,setCoverBoxData])
 
+
+  useEffect(()=>{
+    if(coverBoxData) {
+      setLoadImg(true)
+    }
+  },[coverBoxData])
   return (
     <div suppressHydrationWarning className={`min-h-screen ${hookTheme === 'light' ? 'cover-gradient-white' : 'cover-gradient-black'}`}>
 
@@ -108,8 +115,11 @@ export default function Home() {
         <div className="flex flex-col justify-end sm:justify-center lg:pb-12 h-[55vh] lg:h-[70vh]">
     
           <div className="absolute top-0 left-0 z-[-5] h-[95vh] w-screen">
-                <Image src={(coverBoxData) ? coverBoxData.image_cover : `${process.env.NEXT_PUBLIC_S3}/movie_header/placeholder.webp`} fill className="select-none object-cover object-center" alt={(coverBoxData) ? coverBoxData.title : 'placeholder'} priority/>
-          
+              {loadImg &&
+                  <div className="h-full w-full bg-black relative z-[10]"></div>
+              }
+              <Image src={(coverBoxData) ? coverBoxData.image_cover : `${process.env.NEXT_PUBLIC_S3}/movie_header/placeholder.webp`} fill className="select-none object-cover object-center" alt={(coverBoxData) ? coverBoxData.title : 'placeholder'}  priority/>
+            
           </div>
       
 
