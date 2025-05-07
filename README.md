@@ -28,4 +28,3 @@ npm run start
 - @tanstack/react-query (Call API & Cache 1 minute)
 - react-icons (Icon in website)
 - CI/CD -> Jenkins , Build -> Docker , Server -> Linux (VPS)
-
