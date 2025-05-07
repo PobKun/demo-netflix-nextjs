@@ -71,15 +71,14 @@ export default function Home() {
     }
   },[isLoadingMovieID,dataMovieID,setCoverBoxData])
 
-
-  useEffect(()=>{
-    if(coverBoxData) {
-      setLoadImg(true)
+  const handleImageLoad = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+    if (e.currentTarget.complete) {
+      setLoadImg(false)
     }
-  },[coverBoxData])
+  }
+
   return (
     <div suppressHydrationWarning className={`min-h-screen ${hookTheme === 'light' ? 'cover-gradient-white' : 'cover-gradient-black'}`}>
-
 
         {isLoading && 
           <LoadingOverlay />
@@ -118,7 +117,14 @@ export default function Home() {
               {loadImg &&
                   <div className="h-full w-full bg-black relative z-[10]"></div>
               }
-              <Image src={(coverBoxData) ? coverBoxData.image_cover : `${process.env.NEXT_PUBLIC_S3}/movie_header/placeholder.webp`} fill className="select-none object-cover object-center" alt={(coverBoxData) ? coverBoxData.title : 'placeholder'}  priority/>
+              <Image 
+                src={(coverBoxData) ? coverBoxData.image_cover : `${process.env.NEXT_PUBLIC_S3}/movie_header/placeholder.webp`} 
+                fill 
+                className="select-none object-cover object-center" 
+                alt={(coverBoxData) ? coverBoxData.title : 'placeholder'} 
+                onLoad={handleImageLoad}
+                priority
+              />
             
           </div>
       
@@ -194,7 +200,7 @@ export default function Home() {
         </div>
         
         {data ?
-         <Category data={data} theme={hookTheme ?? 'dark'} />
+         <Category data={data} theme={hookTheme ?? 'dark'} setLoadImg={setLoadImg}/>
         :
           <div className="mt-5 lg:mt-8 px-6">
             <NotFoundData />
