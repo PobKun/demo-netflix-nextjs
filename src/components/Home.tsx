@@ -1,5 +1,4 @@
 'use client'
-import { useSearch } from "@/context/SearchProvider";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -7,28 +6,42 @@ import { FaPlay, FaPlus } from "react-icons/fa";
 import { BsInfoCircle } from "react-icons/bs";
 import { useTheme } from "next-themes";
 import Category from "@/components/assets/Category";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { CategoriesType } from "@/types/Assets";
+import { useQuery } from "@tanstack/react-query";
+import { FetchMovieCategorized } from "@/utils/Fetch";
+import LoadingOverlay from "./assets/LoadingOverlay";
+import NotFoundData from "./assets/NotFoundData";
 
 export default function Home() {
   const { theme } = useTheme()
-  const { search } = useSearch();
   const t = useTranslations()
+  const locale = useLocale()
   const [imageSize, setSmageSize] = useState({
     width: 1,
     height: 1
    });
   const [hookTheme , setHookTheme] = useState<string | undefined>("dark")
+
+  const {isLoading,data} = useQuery({
+    queryKey: ['FetchMovieCategorized'],
+    queryFn: () => FetchMovieCategorized(locale)
+  })
+
   useEffect(()=>{
-    console.log('search',search);
     setHookTheme(theme)
-  },[search,theme])
+  },[theme])
 
 
   const test_category:string = 'TvShow'
 
   return (
     <div suppressHydrationWarning className={`min-h-screen ${hookTheme === 'light' ? 'cover-gradient-white' : 'cover-gradient-black'}`}>
+
+        {isLoading && 
+          <LoadingOverlay />
+        }
+
         <div className="flex flex-col justify-end sm:justify-center lg:pb-12 h-[55vh] lg:h-[70vh]">
     
           <div className="absolute top-0 left-0 z-[-5] h-[95vh] w-screen">
@@ -90,7 +103,16 @@ export default function Home() {
                 </div>
             </div>
         </div>
-        <Category />
+        
+        {data ?
+         <Category data={data} theme={hookTheme ?? 'dark'} />
+        :
+          <div className="mt-5 lg:mt-8 px-6">
+            <NotFoundData />
+          </div>
+        }
     </div>
   );
 }
+
+

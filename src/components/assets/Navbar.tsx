@@ -1,5 +1,5 @@
 'use client'
-import { useSearch } from "@/context/SearchProvider";
+import { useSearch } from "@/providers/SearchProvider";
 import { Locale } from "@/i18n/config";
 import { setUserLocale } from "@/i18n/locale";
 import { AnimatePresence, motion } from "framer-motion";

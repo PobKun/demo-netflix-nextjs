@@ -2,10 +2,11 @@ import type { Metadata } from "next";
 import { Noto_Sans_Thai } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/assets/Navbar";
-import { SearchProvider } from "@/context/SearchProvider";
+import { SearchProvider } from "@/providers/SearchProvider";
 import { ThemeProvider, } from "next-themes";
 import { getLocale } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
+import ReactQueryProvider from "@/providers/ReactQueryProvider";
 
 
 const noto_sans_thai = Noto_Sans_Thai({
@@ -31,21 +32,23 @@ export default async function RootLayout({
       <body
         className={`${noto_sans_thai.className}`}
       >
-        <ThemeProvider attribute="class"  defaultTheme="dark">
-          <NextIntlClientProvider>
-            <SearchProvider> 
-              <section>
-                <Navbar />
-              </section>
-              <section> 
-                {children}
-              </section>
-              <footer className="py-8 text-center bg-white dark:bg-black">
-                <span className="text-black dark:text-white">Demo Netflix (Pattaraphon)</span>
-              </footer>
-            </SearchProvider>
-          </NextIntlClientProvider>
-        </ThemeProvider>
+        <ReactQueryProvider>
+          <ThemeProvider attribute="class"  defaultTheme="dark">
+            <NextIntlClientProvider>
+              <SearchProvider> 
+                <section>
+                  <Navbar />
+                </section>
+                <section> 
+                  {children}
+                </section>
+                <footer className="py-8 text-center bg-white dark:bg-black">
+                  <span className="text-black dark:text-white">Demo Netflix (Pattaraphon)</span>
+                </footer>
+              </SearchProvider>
+            </NextIntlClientProvider>
+          </ThemeProvider>
+        </ReactQueryProvider>
       </body>
     </html>
   );
