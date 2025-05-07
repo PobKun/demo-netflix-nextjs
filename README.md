@@ -1,4 +1,10 @@
 ## Install
+CREATE .env file
+```
+NEXT_PUBLIC_S3="https://s3.wareeasy.com/demo-netflix"
+NEXT_PUBLIC_API="https://demo-netflix-nestjs.wareeasy.com"
+```
+
 Run development server:
 ```bash
 npm install
