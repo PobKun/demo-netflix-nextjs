@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { Swiper ,SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import { useLocale, useTranslations } from 'next-intl';
-import { ApiResponse_MediaCategorized, CategoriesType } from '@/types/Assets';
+import { ApiResponse_MediaCategorized, CategoriesType, MediaItemType } from '@/types/Assets';
 import { useQuery } from '@tanstack/react-query';
 import { FetchMovieSearch } from '@/utils/Fetch';
 import { useSearch } from '@/providers/SearchProvider';
@@ -34,6 +34,12 @@ export default function Category({data,theme,setLoadImg}:{data:ApiResponse_Media
     };
   }, [search,locale,refetch]);
 
+
+  const handleCoverBox = (v:MediaItemType) => {
+    if(coverBoxData && coverBoxData.id !== v.id) { setLoadImg(true) }
+    setCoverBoxData(v);
+  }
+
   return (
     <>
 
@@ -52,7 +58,7 @@ export default function Category({data,theme,setLoadImg}:{data:ApiResponse_Media
                   >
                     {dataSearch.data.map((v, i) => (
                       <SwiperSlide key={i} className='!w-[220px] sm:!w-[380px]'>
-                          <Image onClick={()=>{setCoverBoxData(v);(coverBoxData && coverBoxData.id !== v.id) ? setLoadImg(true) : {}}} src={`${v.image}`} width={390} height={219} className="select-none w-[220px] sm:w-[380px] max-h-[213.93px] rounded cursor-pointer" alt={v.title} loading="lazy"/>
+                          <Image onClick={()=>handleCoverBox(v)} src={`${v.image}`} width={390} height={219} className="select-none w-[220px] sm:w-[380px] max-h-[213.93px] rounded cursor-pointer" alt={v.title} loading="lazy"/>
                       </SwiperSlide>
                     ))}
                   </Swiper>
@@ -77,7 +83,7 @@ export default function Category({data,theme,setLoadImg}:{data:ApiResponse_Media
                   >
                     {items.map((v, i) => (
                       <SwiperSlide key={i} className='!w-[220px] sm:!w-[380px]'>
-                          <Image onClick={()=>{setCoverBoxData(v);(coverBoxData && coverBoxData.id !== v.id) ? setLoadImg(true) : {}}} src={`${v.image}`} width={390} height={219} className="select-none w-[220px] sm:w-[380px] max-h-[213.93px] rounded cursor-pointer" alt={v.title} loading="lazy"/>
+                          <Image onClick={()=>handleCoverBox(v)} src={`${v.image}`} width={390} height={219} className="select-none w-[220px] sm:w-[380px] max-h-[213.93px] rounded cursor-pointer" alt={v.title} loading="lazy"/>
                       </SwiperSlide>
                     ))}
                   </Swiper>
