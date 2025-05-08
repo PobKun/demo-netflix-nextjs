@@ -70,9 +70,10 @@ export default function Home() {
         setCoverBoxData(dataMovieID.data)   
     }
   },[isLoadingMovieID,dataMovieID,setCoverBoxData])
-
+  
   const handleImageLoad = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
     if (e.currentTarget.complete) {
+      console.log('[HOME]','setLoadImg false')
       setLoadImg(false)
     }
   }

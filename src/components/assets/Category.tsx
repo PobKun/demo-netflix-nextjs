@@ -14,7 +14,7 @@ export default function Category({data,theme,setLoadImg}:{data:ApiResponse_Media
   const t = useTranslations()
   const { search } = useSearch();
   const locale = useLocale()
-  const {setCoverBoxData} = useCoverBox()
+  const {coverBoxData,setCoverBoxData} = useCoverBox()
   
   const {isLoading:isLoadingSearch,data:dataSearch,refetch} = useQuery({
       queryKey: ['FetchMovieSearch',search],
@@ -52,7 +52,7 @@ export default function Category({data,theme,setLoadImg}:{data:ApiResponse_Media
                   >
                     {dataSearch.data.map((v, i) => (
                       <SwiperSlide key={i} className='!w-[220px] sm:!w-[380px]'>
-                          <Image onClick={()=>{setCoverBoxData(v);setLoadImg(true)}} src={`${v.image}`} width={390} height={219} className="select-none w-[220px] sm:w-[380px] max-h-[213.93px] rounded cursor-pointer" alt={v.title} loading="lazy"/>
+                          <Image onClick={()=>{setCoverBoxData(v);(coverBoxData && coverBoxData.id !== v.id) ? setLoadImg(true) : {}}} src={`${v.image}`} width={390} height={219} className="select-none w-[220px] sm:w-[380px] max-h-[213.93px] rounded cursor-pointer" alt={v.title} loading="lazy"/>
                       </SwiperSlide>
                     ))}
                   </Swiper>
@@ -77,7 +77,7 @@ export default function Category({data,theme,setLoadImg}:{data:ApiResponse_Media
                   >
                     {items.map((v, i) => (
                       <SwiperSlide key={i} className='!w-[220px] sm:!w-[380px]'>
-                          <Image onClick={()=>{setCoverBoxData(v);setLoadImg(true)}} src={`${v.image}`} width={390} height={219} className="select-none w-[220px] sm:w-[380px] max-h-[213.93px] rounded cursor-pointer" alt={v.title} loading="lazy"/>
+                          <Image onClick={()=>{setCoverBoxData(v);(coverBoxData && coverBoxData.id !== v.id) ? setLoadImg(true) : {}}} src={`${v.image}`} width={390} height={219} className="select-none w-[220px] sm:w-[380px] max-h-[213.93px] rounded cursor-pointer" alt={v.title} loading="lazy"/>
                       </SwiperSlide>
                     ))}
                   </Swiper>
