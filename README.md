@@ -27,5 +27,6 @@ npm run start
 - framer-motion (Animations *Dropdown,image)
 - @tanstack/react-query (Call API & Cache 1 minute)
 - react-icons (Icon in website)
+- Search Menu
 - CI/CD -> Jenkins , Build -> Docker , Server -> Linux (VPS)
 
